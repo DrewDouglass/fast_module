@@ -15,35 +15,35 @@ def main():
 		root = tk.Tk()
 		root.withdraw()
 		#fm_mod_name = input("\n What is the name of the module, including the 'mod_' prefix?\n")
-		fm_mod_name = filedialog.askdirectory(initialdir='.')
+		fm_mod_name_abs = filedialog.askdirectory(initialdir='.')
 		#quit(fm_mod_name)
 		#Main modules folder
-		if(os.path.isdir(fm_mod_name) == False):
-			os.makedirs(fm_mod_name)
-		fm_mod_name = os.path.basename(os.path.normpath(fm_mod_name))
+		if(os.path.isdir(fm_mod_name_abs) == False):
+			os.makedirs(fm_mod_name_abs)
+		fm_mod_name = os.path.basename(os.path.normpath(fm_mod_name_abs))
 		#create tmpl inside new folder
-		os.makedirs(os.path.join(fm_mod_name, "tmpl"))
+		os.makedirs(os.path.join(fm_mod_name_abs, "tmpl"))
 		#Create default.php inside tmpl/
-		with urllib.request.urlopen('https://raw.githubusercontent.com/DrewDouglass/mod_starter/master/tmpl/default.php') as response, open(os.path.join(fm_mod_name, "tmpl", "default.php"), 'wb') as out_file:
+		with urllib.request.urlopen('https://raw.githubusercontent.com/DrewDouglass/mod_starter/master/tmpl/default.php') as response, open(os.path.join(fm_mod_name_abs, "tmpl", "default.php"), 'wb') as out_file:
 			shutil.copyfileobj(response, out_file)
 		#create index.html inside tmpl/
-		with urllib.request.urlopen('https://raw.githubusercontent.com/DrewDouglass/mod_starter/master/index.html') as response, open(os.path.join(fm_mod_name, "tmpl", "index.html"), 'wb') as out_file:
+		with urllib.request.urlopen('https://raw.githubusercontent.com/DrewDouglass/mod_starter/master/index.html') as response, open(os.path.join(fm_mod_name_abs, "tmpl", "index.html"), 'wb') as out_file:
 			shutil.copyfileobj(response, out_file)
 		#create helper.php
-		with urllib.request.urlopen('https://raw.githubusercontent.com/DrewDouglass/mod_starter/master/helper.php') as response, open(os.path.join(fm_mod_name, "helper.php"), 'wb') as out_file:
+		with urllib.request.urlopen('https://raw.githubusercontent.com/DrewDouglass/mod_starter/master/helper.php') as response, open(os.path.join(fm_mod_name_abs, "helper.php"), 'wb') as out_file:
 			shutil.copyfileobj(response, out_file)
 		#create index.html
-		with urllib.request.urlopen('https://raw.githubusercontent.com/DrewDouglass/mod_starter/master/index.html') as response, open(os.path.join(fm_mod_name, "index.html"), 'wb') as out_file:
+		with urllib.request.urlopen('https://raw.githubusercontent.com/DrewDouglass/mod_starter/master/index.html') as response, open(os.path.join(fm_mod_name_abs, "index.html"), 'wb') as out_file:
 			shutil.copyfileobj(response, out_file)
 		#create mod_*.php
-		with urllib.request.urlopen('https://raw.githubusercontent.com/DrewDouglass/mod_starter/master/mod_starter.php') as response, open(os.path.join(fm_mod_name, fm_mod_name + ".php"), 'wb') as out_file:
+		with urllib.request.urlopen('https://raw.githubusercontent.com/DrewDouglass/mod_starter/master/mod_starter.php') as response, open(os.path.join(fm_mod_name_abs, fm_mod_name + ".php"), 'wb') as out_file:
 			shutil.copyfileobj(response, out_file)
 		#create mod_*.xml
-		with urllib.request.urlopen('https://raw.githubusercontent.com/DrewDouglass/mod_starter/master/mod_starter.xml') as response, open(os.path.join(fm_mod_name, fm_mod_name + ".xml"), 'wb') as out_file:
+		with urllib.request.urlopen('https://raw.githubusercontent.com/DrewDouglass/mod_starter/master/mod_starter.xml') as response, open(os.path.join(fm_mod_name_abs, fm_mod_name + ".xml"), 'wb') as out_file:
 			shutil.copyfileobj(response, out_file)
 		#Now replace all mod_starter strings with given module name.
 		replacement = fm_mod_name
-		for dname, dirs, files in os.walk(os.path.join(os.getcwd(), fm_mod_name)):
+		for dname, dirs, files in os.walk(os.path.join(os.getcwd(), fm_mod_name_abs)):
 		    for fname in files:
 		        fpath = os.path.join(dname, fname)
 		        with open(fpath) as f:
