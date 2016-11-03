@@ -16,9 +16,7 @@ def main():
 		print("\nLet's do this. Create a directory.")
 		root = tk.Tk()
 		root.withdraw()
-		#fm_mod_name = input("\n What is the name of the module, including the 'mod_' prefix?\n")
 		fm_mod_name_abs = filedialog.askdirectory(initialdir='.')
-		#quit(fm_mod_name)
 		#Main modules folder
 		if(os.path.isdir(fm_mod_name_abs) == False):
 			os.makedirs(fm_mod_name_abs)
@@ -26,6 +24,7 @@ def main():
 		#create tmpl inside new folder
 		os.makedirs(os.path.join(fm_mod_name_abs, "tmpl"))
 		#Create default.php inside tmpl/
+		#TODO - This is ugly. Turn into a function with params passed to simplify.
 		with urllib.request.urlopen('https://raw.githubusercontent.com/DrewDouglass/mod_starter/master/tmpl/default.php') as response, open(os.path.join(fm_mod_name_abs, "tmpl", "default.php"), 'wb') as out_file:
 			shutil.copyfileobj(response, out_file)
 		#create index.html inside tmpl/
